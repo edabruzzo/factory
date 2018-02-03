@@ -7,22 +7,28 @@ import javax.inject.Inject;
 public class MessageHelper {
 
 	
-	FacesContext context;
+	@Inject 
+	private FacesContext context;
+	
+	private FacesMessage message;
 
+	/*
 	@Inject
 	public MessageHelper(FacesContext context) {
 		super();
 		this.context = context;
 	}
+	*/
 	
 	
 	
-	public void addMessage(FacesMessage message) {
-        addMessage(null, message);
+	public void addMessage(String mensagem) {
+        addMessage(null, mensagem);
     }
 
-    private void addMessage(String clientId, FacesMessage message) {
-        context.addMessage(clientId, message);
+    public void addMessage(String clientId, String mensagem) {
+		message = new FacesMessage(mensagem);
+    	context.addMessage(clientId, message);
     }
 
 
@@ -32,4 +38,5 @@ public class MessageHelper {
     }
 	
 	    
+    
 }

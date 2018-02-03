@@ -17,6 +17,8 @@ public class JPAFactory implements Serializable{
 	
 	private static final long serialVersionUID = 3624552482708677645L;
 
+	//existe outra forma de criar um gerenciador de entidades,  
+	//utilizando uma ou até mais unidades de persistencia?
 	private EntityManagerFactory emf =  Persistence.createEntityManagerFactory( "ControleFinanceiroPU" );
 
     @Produces
