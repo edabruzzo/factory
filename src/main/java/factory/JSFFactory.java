@@ -8,6 +8,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
+import jsfAnnotation.SessionMap;
+
 public class JSFFactory {
 	
 	
@@ -26,6 +28,7 @@ public class JSFFactory {
 
 
 	@Produces
+	@SessionMap
 	public Map<String, Object> sessionMap() {
 	    return getExternalContext().getSessionMap();
 	}
