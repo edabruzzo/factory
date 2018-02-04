@@ -41,7 +41,7 @@ public class MessageHelper {
 
 
     public MessageHelper onFlash() {
-        context.getExternalContext().getFlash().setKeepMessages(true);
+        flash.setKeepMessages(true);
         return this;
     }
 	
