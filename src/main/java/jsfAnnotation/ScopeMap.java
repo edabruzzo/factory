@@ -17,6 +17,12 @@ import javax.inject.Qualifier;
 @Qualifier
 @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SessionMap {
+public @interface ScopeMap {
+	
+	ScopeMap.Scope value();
+	
+	enum Scope{
+		REQUEST, SESSION, APPLICATION	
+	}
 
 }

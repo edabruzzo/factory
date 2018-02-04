@@ -8,7 +8,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
-import jsfAnnotation.SessionMap;
+import jsfAnnotation.ScopeMap;
+import jsfAnnotation.ScopeMap.Scope;
 
 public class JSFFactory {
 	
@@ -28,11 +29,25 @@ public class JSFFactory {
 
 
 	@Produces
-	@SessionMap
+	@ScopeMap(Scope.REQUEST)
+	public Map<String, Object> requestMap() {
+	    return getExternalContext().getRequestMap();
+	}
+	
+	
+	
+	@Produces
+	@ScopeMap(Scope.SESSION)
 	public Map<String, Object> sessionMap() {
 	    return getExternalContext().getSessionMap();
 	}
 
+	
+	@Produces
+	@ScopeMap(Scope.APPLICATION)
+	public Map<String, Object> applicationMap() {
+	    return getExternalContext().getApplicationMap();
+	}
 	
 	
 	private ExternalContext getExternalContext() {
