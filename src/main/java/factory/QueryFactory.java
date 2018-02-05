@@ -27,7 +27,7 @@ public class QueryFactory {
 	String sqlString = pontoInjecao.getAnnotated().getAnnotation(Query_.class).value();
 
 	ParameterizedType type = (ParameterizedType) pontoInjecao.getType();
-	Class classe = type.getClass();
+	Class classe = (Class) type.getClass();
 
 	return jpa.getEntityManager().createNativeQuery(sqlString, classe);
 		
