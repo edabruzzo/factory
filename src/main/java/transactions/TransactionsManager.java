@@ -10,6 +10,7 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 
 import TransactionsAnnotations.Transacional;
+import factory.JPAFactory;
 
 
 
@@ -26,32 +27,25 @@ public class TransactionsManager implements Serializable{
 	
 	private static final long serialVersionUID = -8096401703398419867L;
 
-	
-	EntityManager em;
-
-	
 	@Inject
-	public TransactionsManager(EntityManager em) {
-		super();
-		this.em = em;
-	}
+	private JPAFactory jpa;
 	
-	
+		
 	@AroundInvoke
 	public Object executaComtransacao(InvocationContext context) {
         
-		em.getTransaction().begin();
+		jpa.getEntityManager().getTransaction().begin();
 		
 		try {
 		
 		Object resultadoTransacao =	context.proceed();
-		em.getTransaction().commit();
+		jpa.getEntityManager().getTransaction().commit();
 		return resultadoTransacao;
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			em.getTransaction().rollback();
+			jpa.getEntityManager().getTransaction().rollback();
 			throw new RuntimeException(e);
 		}
 
