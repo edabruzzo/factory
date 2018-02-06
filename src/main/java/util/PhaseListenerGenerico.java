@@ -15,7 +15,7 @@ import javax.faces.event.PhaseListener;
  *
  * @author Emm
  */
-public class LogPhaseListener implements PhaseListener, Serializable {
+public class PhaseListenerGenerico implements PhaseListener, Serializable {
     
     
 	private static final long serialVersionUID = -1064930936747939511L;
