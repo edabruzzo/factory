@@ -39,7 +39,9 @@ public class TransactionsManager implements Serializable{
 		try {
 		
 		Object resultadoTransacao =	context.proceed();
+		
 		jpa.getEntityManager().getTransaction().commit();
+		
 		return resultadoTransacao;
 		
 		} catch (Exception e) {
