@@ -3,6 +3,7 @@ package phaseListener;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
+import javax.enterprise.inject.Vetoed;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.util.AnnotationLiteral;
@@ -12,6 +13,8 @@ import phaseListenerAnnotations.After;
 import phaseListenerAnnotations.Before;
 import phaseListenerAnnotations.PhaseLiteral;
 
+
+@Vetoed
 public class phaseListenerObserver implements Serializable {
 
 	
