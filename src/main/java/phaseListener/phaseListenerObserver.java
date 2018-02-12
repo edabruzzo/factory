@@ -3,14 +3,14 @@ package phaseListener;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.event.Event;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.faces.event.PhaseEvent;
-import javax.inject.Inject;
 
 import phaseListenerAnnotations.After;
 import phaseListenerAnnotations.Before;
-import phaseListenerAnnotations.Phase;
+import phaseListenerAnnotations.PhaseLiteral;
 
 public class phaseListenerObserver implements Serializable {
 
@@ -19,9 +19,10 @@ public class phaseListenerObserver implements Serializable {
 	private static final long serialVersionUID = -5639038416365258130L;
 	
 	
-	@Inject
-    private Event<PhaseEvent> observer;
-    private Annotation momento;
+
+    private BeanManager observer = CDI.current().getBeanManager();
+
+	private Annotation momento;
 
     public phaseListenerObserver after() {
         this.momento = new AnnotationLiteral<After>(){};
@@ -34,7 +35,7 @@ public class phaseListenerObserver implements Serializable {
     }
 
     public void fire(PhaseEvent phaseEvent) {
-        observer.select(momento).select(new AnnotationLiteral<Phase>() {}).fire(phaseEvent);
+        observer.fireEvent(phaseEvent, this.momento, new PhaseLiteral(phaseEvent.getPhaseId()));
     }
 
 
